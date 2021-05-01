@@ -1,0 +1,80 @@
+/*
+----------------------------- listar todos los actores mayores de 21 años -----------------------------
+SELECT * FROM actores WHERE edad > 21
+
+----------------------------- listar todos los actores Masculinos , (contar) -----------------------------
+SELECT COUNT(actores.idActores) FROM actores WHERE idSexo = 1
+
+----------------------------- listar todos los actores Femeninos , (contar) -----------------------------
+SELECT COUNT(actores.idActores) FROM actores WHERE idSexo = 2
+	
+----------------------------- listar todas las peliculas en la que trabajo el actor con id 3 -----------------------------
+SELECT pelicula.nombre 
+FROM pelicula INNER JOIN actores INNER JOIN actores_pelicula
+WHERE actores_pelicula.idActores = 3 AND actores.idActores = 3 AND pelicula.idPelicula = actores_pelicula.idPelicula
+	
+----------------------------- listar todos los actores de la pelicula con id 6 -----------------------------
+SELECT actores.nombre
+FROM pelicula INNER JOIN actores INNER JOIN actores_pelicula
+WHERE actores_pelicula.idPelicula = 6 AND pelicula.idPelicula = 6 AND actores.idActores = actores_pelicula.idActores
+
+----------------------------- modificar el nombre del actor 3 -----------------------------
+SELECT * FROM actores WHERE idActores = 3
+UPDATE actores SET nombre = "Maria" WHERE actores.idActores = 3
+
+----------------------------- modificar el genero de una pelicula -----------------------------
+SELECT pelicula.nombre, pelicula.idPelicula, genero.nombre, genero.idGenero
+FROM genero INNER JOIN pelicula 
+WHERE pelicula.idPelicula = 2 AND pelicula.idGenero = genero.idGenero
+
+UPDATE pelicula 
+SET idGenero = 11 
+WHERE pelicula.idPelicula = 2
+
+----------------------------- modificar nacionalidad actor 4 -----------------------------
+SELECT actores.nombre, pais.nombre, pais.idPais
+FROM actores INNER JOIN pais 
+WHERE actores.idActores = 4 AND actores.idPais = pais.idPais
+
+UPDATE actores 
+SET idPais = 150 
+WHERE actores.idActores = 4
+
+----------------------------- eliminar un actor -----------------------------
+SELECT *
+FROM actores
+WHERE actores.idActores = 1
+
+DELETE FROM actores
+WHERE actores.idActores = 1
+
+SELECT * FROM actores
+
+----------------------------- eliminar una pelicula -----------------------------
+SELECT pelicula.nombre, actores_pelicula.idActores, actores_pelicula.idPelicula
+FROM pelicula INNER JOIN actores_pelicula
+WHERE pelicula.idPelicula = 4 AND actores_pelicula.idPelicula = pelicula.IdPelicula
+
+DELETE FROM actores_pelicula
+WHERE actores_pelicula.idPelicula = 4
+
+DELETE FROM pelicula INNER JOIN actores_pelicula
+WHERE pelicula.idPelicula = 4
+
+DELETE FROM pelicula
+WHERE pelicula.idPelicula = 4
+
+SELECT * FROM pelicula
+
+----------------------------- insertar una pelicula -----------------------------
+INSERT INTO pelicula (nombre, idGenero)
+VALUES ("Kung Fusion", 5);
+
+SELECT * FROM pelicula
+
+----------------------------- insertar una actor -----------------------------
+INSERT INTO actores (nombre, apellido, edad, idSexo, idPais)
+VALUES ("Mirian", "Dominguez", 55, 2, 10);
+
+SELECT * FROM actores
+*/
